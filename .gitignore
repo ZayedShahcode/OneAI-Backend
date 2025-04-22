@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+*.env
+
+# Flask instance folder
+instance/
+*.sqlite3
+
+# Pytest cache
+.pytest_cache/
+
+# VSCode settings
+.vscode/
+
+# Mac and Linux files
+.DS_Store
+*.swp
+
+# Logs
+*.log
+
+# MySQL dumps
+*.sql
+
+# Compiled HTML/static files (optional if you generate them)
+static/build/
+dist/
