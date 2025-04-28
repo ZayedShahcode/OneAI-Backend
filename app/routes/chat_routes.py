@@ -3,10 +3,13 @@ import asyncio
 from app.chatlogic.chatbot import chat
 from app.utils.jwt_handler import token_required
 from app.chatlogic.graph import bot
+from flask_cors import CORS
 
 chat_bp = Blueprint('api', __name__)
 
-@chat_bp.route('/',methods=['GET'])
+
+
+@chat_bp.route('/',methods=['GET', 'OPTIONS'])
 @token_required
 def home():
     return "Welcome to One AI"

@@ -5,8 +5,11 @@ from app.utils.jwt_handler import generate_token, token_required
 
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/signup', methods=['POST'])
+@auth_bp.route('/signup', methods=['POST', 'OPTIONS'])
 def signup():
+    if request.method == 'OPTIONS':
+        return '', 200
+
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
@@ -22,9 +25,11 @@ def signup():
 
     return jsonify({'message': 'Signup successful'}), 201
 
-
-@auth_bp.route('/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST', 'OPTIONS'])
 def login():
+    if request.method == 'OPTIONS':
+        return '', 200
+
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
@@ -35,10 +40,11 @@ def login():
     user = get_user_by_username(username)
     if user and check_password_hash(user['password'], password):
         token = generate_token(username, user['id'])
-        return jsonify({'username':username, 'token': token}), 200
+        return jsonify({'username': username, 'token': token}), 200
     else:
+        print(user)
         return jsonify({'error': 'Invalid credentials'}), 401
-    
+
 @auth_bp.route('/protected', methods=['GET'])
 @token_required
 def protected():
