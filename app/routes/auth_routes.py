@@ -45,7 +45,9 @@ def login():
         print(user)
         return jsonify({'error': 'Invalid credentials'}), 401
 
-@auth_bp.route('/protected', methods=['GET'])
+@auth_bp.route('/protected', methods=['GET','OPTIONS'])
 @token_required
 def protected():
+    if request.method == 'OPTIONS':
+        return '', 200
     return jsonify({'message': f'Hello, {request.username} with id {request.user_id}! This is a protected route.'})
