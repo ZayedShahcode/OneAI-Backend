@@ -10,7 +10,7 @@ from langgraph.graph import START, StateGraph
 from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
 
 load_dotenv()
-model = init_chat_model("llama3-8b-8192", model_provider="groq")
+model = init_chat_model("llama-3.1-8b-instant", model_provider="groq")
 
 prompt_template = ChatPromptTemplate.from_messages(
     [
